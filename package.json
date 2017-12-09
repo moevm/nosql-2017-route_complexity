@@ -1,0 +1,22 @@
+{
+  "name": "testdb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "*",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "jquery": "*",
+    "morgan": "*",
+    "neo4j-driver": "*",
+    "node-static": "^0.7.10",
+    "socket.io": "^2.0.4",
+    "ws": "^3.3.2"
+  }
+}
