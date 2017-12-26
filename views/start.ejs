@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Complexity</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css" >
+        body{
+            background: #ffffff;
+            margin: 0px;
+            font-family: sans-serif;
+            height: auto;
+            }
+            .main_wrapper{
+            width: 76%;
+            margin: 0% 12%;
+            height: 100%;
+            background: #ffffff;
+            display: inline-block;
+
+            }
+
+            .header_wrapper{
+            background: #535363;
+            height: auto;
+            }
+            .header{
+                width: 76%;
+                margin: 0% 12%;
+                padding: 7px 0px;
+                display: grid;
+            }
+            .title{
+                float: left;
+                font-size: 28pt;
+            }
+            .nav{
+                display: inline-block;
+                margin-bottom: 5px;
+                float: left;
+            }
+                .nav ul{
+                margin: 0px;
+                padding: 0px;
+                list-style: none;
+                font-size: 12pt;
+                }
+                .nav li{
+                display: inline-block;
+                vertical-align: middle;
+                padding-right: 5px;
+                padding-top: 5px;
+                }
+                .nav a:link{
+                color: #000;
+                text-decoration: none;
+                }
+                .nav a:hover{
+                text-decoration: underline;
+                }
+                .nav a:visited{
+                color: #000;
+                text-decoration: none;
+                }
+
+            .container{
+            margin: 5px;
+            margin-top: 15px;
+            display: grid;
+            }
+
+            .map_container{
+                display: block;
+                width: inherit;
+                height: 400px;
+            }
+                .map_container img{
+                max-width: 100%;
+                height: auto;
+                display: block;
+                }
+                #map{
+                width: 100%;
+                height: 100%;
+                }
+
+            .form_wrapper{
+                width: 99%;
+                padding-left: 1%;
+                display: inline-block;
+            }
+                .form{
+                display: grid;
+                }
+                .form input{
+                margin-bottom: 5px;
+                }
+                .form div{
+                margin-top: 7px;
+                }
+
+            .footer_wrapper{
+            background: #0f0f12;
+            margin-top: 20px;
+            color: #858599;
+            }
+            .footer{
+                display: inline-block;
+                width: 76%;
+                margin: 0% 12%;
+                padding: 1%;
+            }
+
+    
+    </style>
+    
+	<style>
+        #list {
+            padding: 10px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <header class='header_wrapper'> 
+        <div class='header'> 
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <span class="title">Route Complexity</span>
+        </div>
+    </header>
+
+    <form name="adrForm" method="post" action="/path/add" >
+        <input type="text" id="pA" name = "pointA" ><br>
+        <input type="text" id="pB" name = "pointB" ><br>
+        <input type="submit" value="Построить маршрут">
+    </form> 
+
+</body>
+
+</html>
