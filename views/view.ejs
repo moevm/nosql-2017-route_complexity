@@ -142,6 +142,12 @@
 </div>
  <div id="list"></div>
  
+    <form name="adrForm" method="post" action="/path/add">
+        <input type="text" id="pA" name = "pointA" ><br>
+        <input type="text" id="pB" name = "pointB" ><br>
+        <input type="submit" value="Построить новый маршрут">
+    </form>    
+
     <form id="form" method="post" action="/coord/add" >
         <textarea id="idStr" name = "coord_id" hidden="true"></textarea><br>
         <textarea id="xStr" name = "coord_x" hidden="true"></textarea><br>
@@ -153,17 +159,17 @@
     </form>
     
     <div>Complexity = </div>
-    <%= complexity -1%> 
+    <%= complexity - 1 %> 
 
     <br><br>
     
  </div>
  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
  <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
- <script type="text/javascript"> 
+ <script type="text/javascript">
      ymaps.ready(function init() {
-         
-         var myMap = new ymaps.Map("map", {
+        var myMap = new ymaps.Map("map", {
+             // center: [X, Y],
              center: [55.745508, 37.435225],
              zoom: 13
          }, {
@@ -187,7 +193,6 @@
              // Задаем контент меток в начальной и конечной точках.
              points.get(0).properties.set('iconContent', 'Точка отправления');
              points.get(lastPoint).properties.set('iconContent', 'Точка прибытия');
-
              // Проанализируем маршрут по сегментам.
              // Сегмент - участок маршрута, который нужно проехать до следующего
              // изменения направления движения.
@@ -202,12 +207,24 @@
                  way,
                  segments;
              // Получаем массив путей и массив маршрута ro
+             A = route.getPaths().get(0).getSegments();
+             coordA = A[0].getCoordinates();
+             B = route.getPaths().get(route.getPaths().getLength() - 1).getSegments();
+             coordB = B[0].getCoordinates(B.length - 1);
+             //X = (coordA[0][0] + coordB[0][0]) * 0.5;
+             //Y = (coordA[0][1] + coordB[0][1]) * 0.5;
+
              for (var i = 0; i < route.getPaths().getLength(); i++) {
                  way = route.getPaths().get(i);
                  segments = way.getSegments();
                  for (var j = 0; j < segments.length; j++) {
                      var street = segments[j].getStreet();
                      var coords = segments[j].getCoordinates();
+                     if ( coords[0][0] != coordA[0][0] && coords[0][1] != coordA[0][1]
+                        || coords[0][0] != coordB[0][0] && coords[0][1] != coordB[0][1] ) {
+                            myPlacemark = new ymaps.Placemark([coords[0][0], coords[0][1]], { hintContent: '', balloonContent: '' });
+                            myMap.geoObjects.add(myPlacemark);
+                        }
                      ro.push({
                          id: counter,
                          x: coords[0][0],
@@ -232,7 +249,6 @@
              document.getElementById("xStr").value = str2;
              document.getElementById("yStr").value = str3;
              document.getElementById("strStr").value = str4;
-         
          }, function (error) {
              alert('Возникла ошибка: ' + error.message);
          });

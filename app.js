@@ -45,7 +45,7 @@ app.post('/coord/add', function(req, res){
     var arrX = xStr.split(' ');
     var arrY = yStr.split(' ');
     var arrStr = strStr.split(' , ');
-    var compl = (arrId.length-2);
+    var compl = (arrId.length);
 
     function newDot(id, x, y, str){
         session
@@ -68,7 +68,7 @@ app.post('/coord/add', function(req, res){
         newDot(arrId[i], arrX[i], arrY[i], arrStr[i]);  
     }
     function getCompl(count){
-        return (count-2);
+        return (count);
     };
     return res.render('view', {pointA: A, pointB: B, complexity: compl});
     console.log(getCompl(arrId.length));
