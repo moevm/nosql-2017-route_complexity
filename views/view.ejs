@@ -88,10 +88,22 @@
             .form_wrapper{
                 width: 99%;
                 padding-left: 1%;
-                display: inline-block;
+                display: inline-flex;
             }
-                .form{
-                display: grid;
+                .form_wrapper div{
+                    display: inline-block;
+                    width: 49%;
+                    height: auto;
+                }
+
+                .form_wrapper div form input{
+                    margin-bottom: 5px;
+                }
+                .form_wrapper div form textarea{
+                    margin: 0px;
+                    padding: 0px;
+                    border: 0px;
+                    height: 0px;
                 }
                 .form input{
                 margin-bottom: 5px;
@@ -126,44 +138,46 @@
 <body>
     <header class='header_wrapper'> 
         <div class='header'> 
-            <nav class="nav">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </nav>
             <span class="title">Route Complexity</span>
         </div>
     </header>
 <div class='main_wrapper'>
-       <div class='container'>
-       <div class='map_container'>
-       <div id='map' ></div>
+    <div class='container'>
+        <div class='map_container'>
+            <div id='map' ></div>
+        </div>
+        <div id="list"></div>
+        <div class="form_wrapper">
+            <div>
+                <span>Построить маршрут</span>
+                <form name="adrForm" method="post" action="/path/add"  style="margin-top: 20px;">
+                    <span>От</span>
+                    <input type="text" id="pA" name = "pointA" size = "40"><br>
+                    <span>До</span>
+                    <input type="text" id="pB" name = "pointB" size = "40"><br>
+                    <input type="submit" value="Построить">
+                </form>  
+            </div>
+              
+            <div>
+                <span>Вычислить сложность маршрута</span>
+                <form id="form" method="post" action="/coord/add" >
+                    <textarea id="idStr" name = "coord_id" style="display: none;"></textarea>
+                    <textarea id="xStr" name = "coord_x" style="display: none;"></textarea>
+                    <textarea id="yStr" name = "coord_y" style="display: none;"></textarea>
+                    <textarea id="strStr" name = "coord_str" style="display: none;"></textarea><br>
+                    <input type="text" id = "pAdiv" name = "pA" size = "40" value = '<%= pointA%>' ><br>
+                    <input type="text" id = "pBdiv" name = "pB" size = "40" value = '<%= pointB%>' ><br>
+                    <input type="submit" value="Вычислить">
+                </form>
+        
+                <div style="width:93px">Complexity = </div>
+                <span><%= complexity - 1 %> </span>
+            </div>
+        </div>
+    </div>
 </div>
- <div id="list"></div>
- 
-    <form name="adrForm" method="post" action="/path/add">
-        <input type="text" id="pA" name = "pointA" ><br>
-        <input type="text" id="pB" name = "pointB" ><br>
-        <input type="submit" value="Построить новый маршрут">
-    </form>    
 
-    <form id="form" method="post" action="/coord/add" >
-        <textarea id="idStr" name = "coord_id" hidden="true"></textarea><br>
-        <textarea id="xStr" name = "coord_x" hidden="true"></textarea><br>
-        <textarea id="yStr" name = "coord_y" hidden="true"></textarea><br>
-        <textarea id="strStr" name = "coord_str" hidden="true"></textarea><br>
-        <input type="text" id = "pAdiv" name = "pA" size = "40" value = '<%= pointA%>' ><br>
-        <input type="text" id = "pBdiv" name = "pB" size = "40" value = '<%= pointB%>' ><br>
-        <input type="submit" value="Сложность">
-    </form>
-    
-    <div>Complexity = </div>
-    <%= complexity - 1 %> 
-
-    <br><br>
-    
- </div>
  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
  <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
  <script type="text/javascript">
