@@ -5,7 +5,7 @@
 <head>
     <title>Complexity</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style type="text/css" >
+    <style type="text/css">
         body{
             background: #ffffff;
             margin: 0px;
@@ -35,34 +35,6 @@
                 float: left;
                 font-size: 28pt;
             }
-            .nav{
-                display: inline-block;
-                margin-bottom: 5px;
-                float: left;
-            }
-                .nav ul{
-                margin: 0px;
-                padding: 0px;
-                list-style: none;
-                font-size: 12pt;
-                }
-                .nav li{
-                display: inline-block;
-                vertical-align: middle;
-                padding-right: 5px;
-                padding-top: 5px;
-                }
-                .nav a:link{
-                color: #000;
-                text-decoration: none;
-                }
-                .nav a:hover{
-                text-decoration: underline;
-                }
-                .nav a:visited{
-                color: #000;
-                text-decoration: none;
-                }
 
             .container{
             margin: 5px;
@@ -88,31 +60,23 @@
             .form_wrapper{
                 width: 99%;
                 padding-left: 1%;
-                display: inline-block;
+                display: inline-flex;
             }
-                .form{
-                display: grid;
-                }
-                .form input{
-                margin-bottom: 5px;
-                }
-                .form div{
-                margin-top: 7px;
+                .form_wrapper div{
+                    display: inline-block;
+                    width: 49%;
+                    height: auto;
                 }
 
-            .footer_wrapper{
-            background: #0f0f12;
-            margin-top: 20px;
-            color: #858599;
-            }
-            .footer{
-                display: inline-block;
-                width: 76%;
-                margin: 0% 12%;
-                padding: 1%;
-            }
-
-    
+                .form_wrapper div form input{
+                    margin-bottom: 5px;
+                }
+                .form_wrapper div form textarea{
+                    margin: 0px;
+                    padding: 0px;
+                    border: 0px;
+                    height: 0px;
+                }
     </style>
     
 	<style>
@@ -129,13 +93,48 @@
             <span class="title">Route Complexity</span>
         </div>
     </header>
+<div class='main_wrapper'>
+    <div class='container'>
+        <div class='map_container'>
+            <div id='map' ></div>
+        </div>
+        <div id="list"></div>
+        <div class="form_wrapper">
+            <div>
+                <span>Построить маршрут</span>
+                <form name="adrForm" method="post" action="/path/add"  style="margin-top: 20px;">
+                    <span>От</span>
+                    <input type="text" id="pA" name = "pointA" size = "40"><br>
+                    <span>До</span>
+                    <input type="text" id="pB" name = "pointB" size = "40"><br>
+                    <input type="submit" value="Построить">
+                </form>  
+            </div>
+        </div>
+    </div>
+</div>
 
-    <form name="adrForm" method="post" action="/path/add" >
-        <input type="text" id="pA" name = "pointA" ><br>
-        <input type="text" id="pB" name = "pointB" ><br>
-        <input type="submit" value="Построить маршрут">
-    </form> 
+ <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+ <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+ <script type="text/javascript">
+     ymaps.ready(function init() {
+        var myMap = new ymaps.Map("map", {
+             // center: [X, Y],
+             center: [59.93, 30.26],
+             zoom: 10
+         }, {
+             searchControlProvider: 'yandex#search'
+         });;
 
+         myMap.controls
+            .remove('typeSelector')
+            .remove('trafficControl')
+            .remove('rulerControl')
+            .remove('fullscreenControl');
+     });
+ 
+ </script>
 </body>
 
 </html>
+

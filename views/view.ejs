@@ -35,35 +35,7 @@
                 float: left;
                 font-size: 28pt;
             }
-            .nav{
-                display: inline-block;
-                margin-bottom: 5px;
-                float: left;
-            }
-                .nav ul{
-                margin: 0px;
-                padding: 0px;
-                list-style: none;
-                font-size: 12pt;
-                }
-                .nav li{
-                display: inline-block;
-                vertical-align: middle;
-                padding-right: 5px;
-                padding-top: 5px;
-                }
-                .nav a:link{
-                color: #000;
-                text-decoration: none;
-                }
-                .nav a:hover{
-                text-decoration: underline;
-                }
-                .nav a:visited{
-                color: #000;
-                text-decoration: none;
-                }
-
+        
             .container{
             margin: 5px;
             margin-top: 15px;
@@ -105,26 +77,6 @@
                     border: 0px;
                     height: 0px;
                 }
-                .form input{
-                margin-bottom: 5px;
-                }
-                .form div{
-                margin-top: 7px;
-                }
-
-            .footer_wrapper{
-            background: #0f0f12;
-            margin-top: 20px;
-            color: #858599;
-            }
-            .footer{
-                display: inline-block;
-                width: 76%;
-                margin: 0% 12%;
-                padding: 1%;
-            }
-
-    
     </style>
     
 	<style>
@@ -184,11 +136,17 @@
      ymaps.ready(function init() {
         var myMap = new ymaps.Map("map", {
              // center: [X, Y],
-             center: [55.745508, 37.435225],
-             zoom: 13
+             center: [59.93, 30.26],
+             zoom: 10
          }, {
              searchControlProvider: 'yandex#search'
          });;
+
+         myMap.controls
+            .remove('typeSelector')
+            .remove('trafficControl')
+            .remove('rulerControl')
+            .remove('fullscreenControl');
 
          // Добавим на карту схему проезда
          ymaps.route([
@@ -231,6 +189,7 @@
              for (var i = 0; i < route.getPaths().getLength(); i++) {
                  way = route.getPaths().get(i);
                  segments = way.getSegments();
+
                  for (var j = 0; j < segments.length; j++) {
                      var street = segments[j].getStreet();
                      var coords = segments[j].getCoordinates();
@@ -239,6 +198,7 @@
                             myPlacemark = new ymaps.Placemark([coords[0][0], coords[0][1]], { hintContent: '', balloonContent: '' });
                             myMap.geoObjects.add(myPlacemark);
                         }
+
                      ro.push({
                          id: counter,
                          x: coords[0][0],
@@ -248,6 +208,7 @@
                      counter = counter+1;
                  }
              }
+
              var str1='';
              var str2='';
              var str3='';
